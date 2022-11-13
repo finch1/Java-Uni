@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controller">
+<children>
+    <TabPane prefHeight="1000.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab fx:id="loginTab" text="Login">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <Text layoutX="803.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close the Application to log out." />
+                            <TextField fx:id="textuserName" style="-fx-text-box-border: grey" layoutX="395.0" layoutY="432.0" prefHeight="25.0" prefWidth="250.0" promptText="username" AnchorPane.leftAnchor="395.0" AnchorPane.rightAnchor="355.0" />
+                            <PasswordField fx:id="textuserPass" style="-fx-text-box-border: grey" layoutX="395.0" layoutY="470.0" prefHeight="25.0" prefWidth="250.0" promptText="password" AnchorPane.leftAnchor="395.0" AnchorPane.rightAnchor="355.0" AnchorPane.topAnchor="470.0" />
+                            <Button fx:id="BtnLogin" layoutX="599.0" layoutY="512.0" mnemonicParsing="false" onAction="#pressBtnLogin" text="LogIn" />
+                            <Label fx:id="userLoginMsg" layoutX="395.0" layoutY="403.0" text="Please Log In." style="-fx-font-size: 12pt"/>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab fx:id="userTab" text="User">
+                <content>
+                    <AnchorPane layoutY="500.0" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="200.0">
+                        <children>
+                            <Label layoutX="252.0" layoutY="395.0" text="NAME" AnchorPane.rightAnchor="714.0" />
+                            <Label layoutX="195.0" layoutY="425.0" text="EMAIL" AnchorPane.rightAnchor="714.0" />
+                            <Label layoutX="252.0" layoutY="454.0" text="PHONE NUMBER" AnchorPane.rightAnchor="714.0" />
+                            <Button fx:id="btnChangePass" layoutX="602.0" layoutY="618.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+                            <GridPane layoutX="315.0" layoutY="388.0" prefHeight="183.0" prefWidth="378.0">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                <children>
+                                    <TextField fx:id="textName" />
+                                    <TextField fx:id="textEmail" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textPhone" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textOffice" prefHeight="33.0" prefWidth="386.0" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textPassword" GridPane.rowIndex="4" />
+                                    <CheckBox fx:id="textRole" mnemonicParsing="false" text="Role" GridPane.rowIndex="5" />
+                                </children>
+                            </GridPane>
+                            <Button fx:id="btnDeleteUser" layoutX="657.0" layoutY="583.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
+                            <Button fx:id="btnAddUser" layoutX="604.0" layoutY="583.0" mnemonicParsing="false" onAction="#addNewUser" text="Add" />
+                            <Label layoutX="250.0" layoutY="485.0" text="OFFICE" />
+                            <TableView fx:id="userTable" layoutY="-1.0" prefHeight="377.0" prefWidth="1000.0" onMouseClicked="#handleUserRowSelect">
+                                <columns>
+                                    <TableColumn fx:id="tblUserId" prefWidth="75.0" text="Id" >
+                                        <cellValueFactory><PropertyValueFactory property="_id" /></cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="tblUserName" prefWidth="75.0" text="Name" >
+                                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="tblUserEmail" prefWidth="75.0" text="Email" >
+                                        <cellValueFactory><PropertyValueFactory property="email" /></cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="tblUserPhone" prefWidth="105.0" text="Phone Number" >
+                                        <cellValueFactory><PropertyValueFactory property="phone" /></cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="tblUserOffice" prefWidth="105.0" text="Office Number" >
+                                        <cellValueFactory><PropertyValueFactory property="office" /></cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="tblUserRole" prefWidth="105.0" text="Role" >
+                                        <cellValueFactory><PropertyValueFactory property="role" /></cellValueFactory>
+                                    </TableColumn>
+                                </columns>
+                                <sortOrder>
+                                    <fx:reference source="tblUserId"/>
+                                    <fx:reference source="tblUserName"/>
+                                    <fx:reference source="tblUserEmail"/>
+                                    <fx:reference source="tblUserPhone"/>
+                                    <fx:reference source="tblUserOffice"/>
+                                    <fx:reference source="tblUserRole"/>
+                                </sortOrder>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                            <Label layoutX="194.0" layoutY="515.0" text="NEW PASSWORD" />
+                            <Label fx:id="userMsg" layoutX="315.0" layoutY="622.0" text="Label" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab fx:id="roomTab" text="Rooms">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <SplitPane dividerPositions="0.29797979797979796" layoutX="78.0" layoutY="95.0" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <children>
+                                            <TableView fx:id="roomView" layoutX="14.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onMouseClicked="#handleRoomRowSelect">
+                                                <columns>
+                                                    <TableColumn fx:id="tblRoomNumber" prefWidth="111.0" text="ROOM Number" >
+                                                        <cellValueFactory><PropertyValueFactory property="_room_number" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblRoomType" prefWidth="181.0" text="ROOM Type" >
+                                                        <cellValueFactory><PropertyValueFactory property="_room_type" /></cellValueFactory>
+                                                    </TableColumn>
+                                                </columns>
+                                                <sortOrder>
+                                                    <fx:reference source="tblRoomNumber"/>
+                                                    <fx:reference source="tblRoomType"/>
+                                                </sortOrder>
+                                                <columnResizePolicy>
+                                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
+                                            </TableView>
+                                        </children>
+                                    </AnchorPane>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <children>
+                                            <SplitPane layoutX="169.0" layoutY="627.0" orientation="VERTICAL" />
+                                            <GridPane layoutX="160.0" layoutY="42.0" prefHeight="120.0" prefWidth="500.0" AnchorPane.topAnchor="42.0">
+                                                <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="0.0" prefWidth="500.0" />
+                                                </columnConstraints>
+                                                <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                </rowConstraints>
+                                                <opaqueInsets>
+                                                    <Insets />
+                                                </opaqueInsets>
+                                                <children>
+                                                    <TextField fx:id="textRoomNumber" prefHeight="25.0" prefWidth="160.0" />
+                                                    <TextField fx:id="textRoomType" prefHeight="25.0" prefWidth="160.0" GridPane.rowIndex="1" />
+                                                    <TextField fx:id="textRoomCapacity" prefHeight="25.0" prefWidth="160.0" GridPane.rowIndex="2" />
+                                                    <TextField fx:id="textRoomPhone" prefHeight="25.0" prefWidth="160.0" GridPane.rowIndex="3" />
+                                                </children>
+                                            </GridPane>
+                                            <Label layoutX="8.0" layoutY="6.0" text="Room Details" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="6.0">
+                                                <font>
+                                                    <Font size="15.0" />
+                                                </font>
+                                            </Label>
+                                            <Label layoutX="18.0" layoutY="300.0" text="Booking Details" AnchorPane.leftAnchor="18.0">
+                                                <font>
+                                                    <Font size="15.0" />
+                                                </font>
+                                            </Label>
+                                            <Button fx:id="RoomRefresh" layoutX="631.0" layoutY="4.0" mnemonicParsing="false" text="Refresh" onAction="#RefreshRoomList"/>
+                                            <Button fx:id="BtnsearchRoom" layoutX="424.0" layoutY="251.0" mnemonicParsing="false" text="Search" onAction="#SearchARoom"/>
+                                            <DatePicker fx:id="textRoomDate" layoutX="141.0" layoutY="215.0" />
+                                            <Label layoutX="334.0" layoutY="219.0" text="Type" />
+                                            <TextField fx:id="textMinCap" layoutX="275.0" layoutY="251.0" prefHeight="25.0" prefWidth="40.0" />
+                                            <Label layoutX="197.0" layoutY="255.0" text="Min Capacity" />
+                                            <Button fx:id="bookingSearch" layoutX="623.0" layoutY="584.0" mnemonicParsing="false" text="Search"/>
+                                            <TextField fx:id="searchBookingRoom" layoutX="284.0" layoutY="584.0" prefHeight="25.0" prefWidth="96.0" promptText="room" />
+                                            <Label layoutX="244.0" layoutY="588.0" text="Room" />
+                                            <TextField fx:id="searchBookingBy" layoutX="460.0" layoutY="584.0" prefHeight="25.0" prefWidth="130.0" promptText="booked by"/>
+                                            <Label layoutX="400.0" layoutY="588.0" text="Booked By" />
+                                            <Label layoutX="98.0" layoutY="219.0" text="Date" />
+                                            <Button fx:id="bookingEditBtn" layoutX="576.0" layoutY="524.0" mnemonicParsing="false" text="Edit" onAction="#editBooking"/>
+                                            <Button fx:id="bookingDeleteBtn" layoutX="624.0" layoutY="524.0" mnemonicParsing="false" text="Delete" onAction="#deleteBooking"/>
+                                            <Button disable="true" fx:id="btnAddRoom" layoutX="512.0" layoutY="175.0" mnemonicParsing="false" text="Add" onAction="#addRoom"/>
+                                            <Button disable="true" layoutX="561.0" layoutY="175.0" mnemonicParsing="false" text="Edit" />
+                                            <Button disable="true" layoutX="609.0" layoutY="175.0" mnemonicParsing="false" text="Delete" />
+                                            <Label layoutX="62.0" layoutY="50.0" text="Room Number" />
+                                            <Label layoutX="81.0" layoutY="80.0" text="Room Type" />
+                                            <Label layoutX="95.0" layoutY="110.0" text="Capacity" />
+                                            <Label layoutX="61.0" layoutY="140.0" text="Phone Number" />
+                                            <Label layoutX="113.0" layoutY="340.0" text="Date" />
+                                            <Label layoutX="112.0" layoutY="370.0" text="Time " />
+                                            <Label layoutX="92.0" layoutY="400.0" text="Duration" />
+                                            <Label layoutX="82.0" layoutY="430.0" text="Booked By" />
+                                            <Label layoutX="32.0" layoutY="460.0" text="Estimated Attendies" />
+                                            <Label layoutX="76.0" layoutY="490.0" text="Event Name" />
+                                            <ComboBox fx:id="roomTypeCombo" layoutX="372.0" layoutY="215.0" prefWidth="150.0" promptText="Select Room Type">
+                                            </ComboBox>
+                                            <DatePicker fx:id="bookingDatePick" layoutX="61.0" layoutY="584.0" />
+                                            <Button fx:id="bookingRefresh" layoutX="621.0" layoutY="298.0" mnemonicParsing="false" text="Refresh" onAction="#RefreshBookingList"/>
+                                            <Label layoutX="14.0" layoutY="588.0" text="Date" />
+                                            <GridPane layoutX="148.0" layoutY="424.0" prefHeight="90.0" prefWidth="529.0">
+                                                <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                </columnConstraints>
+                                                <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                </rowConstraints>
+                                                <children>
+                                                    <TextField fx:id="textBookingBookedBy" />
+                                                    <TextField fx:id="textBookingAttending" GridPane.rowIndex="1" />
+                                                    <TextField fx:id="textBookingEvent" GridPane.rowIndex="2" />
+                                                </children>
+                                            </GridPane>
+                                            <DatePicker layoutX="148.0" layoutY="336.0" />
+                                            <Spinner fx:id="bookingTimeDetails" layoutX="148.0" layoutY="366.0" />
+                                            <Spinner fx:id="bookingDurationDetails" layoutX="148.0" layoutY="396.0" />
+                                            <Separator layoutX="1.0" layoutY="286.0" prefHeight="3.0" prefWidth="698.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="286.0" />
+                                            <Separator layoutX="1.0" layoutY="206.0" prefHeight="3.0" prefWidth="698.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="206.0" />
+                                            <Separator layoutX="1.0" layoutY="567.0" prefHeight="3.0" prefWidth="698.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="567.0" />
+
+                                             <TableView fx:id="bookingView" layoutX="-1.0" layoutY="618.0" prefHeight="352.0" prefWidth="700.0" onMouseClicked="#handleBookingRowSelect">
+                                                <columns>
+                                                    <TableColumn fx:id="tblBookingDate" prefWidth="131.0" text="Date" >
+                                                        <cellValueFactory><PropertyValueFactory property="_date" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingTime" prefWidth="57.0" text="Time" >
+                                                        <cellValueFactory><PropertyValueFactory property="_time" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingDuration" prefWidth="99.0" text="Duration" >
+                                                        <cellValueFactory><PropertyValueFactory property="_duration" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingRoomNumber" prefWidth="117.0" text="Room Number" >
+                                                        <cellValueFactory><PropertyValueFactory property="_roomNumber" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingBookedBy" prefWidth="111.0" text="Booked by" >
+                                                        <cellValueFactory><PropertyValueFactory property="_bookedByName" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingAttending" prefWidth="102.0" text="Est. Attending" >
+                                                        <cellValueFactory><PropertyValueFactory property="_estimatedAttendies" /></cellValueFactory>
+                                                    </TableColumn>
+                                                    <TableColumn fx:id="tblBookingEvent" prefWidth="82.0" text="Event Name" >
+                                                        <cellValueFactory><PropertyValueFactory property="_eventName" /></cellValueFactory>
+                                                    </TableColumn>
+                                                </columns>
+                                                <sortOrder>
+                                                    <fx:reference source="tblBookingDate"/>
+                                                    <fx:reference source="tblBookingTime"/>
+                                                    <fx:reference source="tblBookingDuration"/>
+                                                    <fx:reference source="tblBookingRoomNumber"/>
+                                                    <fx:reference source="tblBookingBookedBy"/>
+                                                    <fx:reference source="tblBookingAttending"/>
+                                                    <fx:reference source="tblBookingEvent"/>
+                                                </sortOrder>
+                                                <columnResizePolicy>
+                                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                </columnResizePolicy>
+                                            </TableView>
+
+                                            <Label fx:id="bookingMsg" layoutX="358.0" layoutY="528.0" text="" />
+                                            <Label fx:id="roomMsg" layoutX="493.0" layoutY="255.0" text="" />
+                                            <Label layoutX="397.0" layoutY="341.0" text="Room Number" />
+                                            <ComboBox fx:id="roomNumCombo" layoutX="493.0" layoutY="337.0" prefWidth="150.0" />
+                                        </children>
+                                    </AnchorPane>
+                                </items>
+                            </SplitPane>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab fx:id="bookingTab" text="Booking">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <Label layoutX="14.0" layoutY="14.0" text="Freqency">
+                                <font>
+                                    <Font size="15.0" />
+                                </font>
+                            </Label>
+                            <RadioButton fx:id="radioOneOff" layoutX="35.0" layoutY="51.0" mnemonicParsing="false" text="One-Off" />
+                            <RadioButton fx:id="radioWeekly" layoutX="147.0" layoutY="51.0" mnemonicParsing="false" text="Weekly" />
+                            <TextField fx:id="weeklyAmount" layoutX="151.0" layoutY="98.0" prefHeight="26.0" prefWidth="151.0" promptText="For Number of weeks"/>
+                            <Label layoutX="38.0" layoutY="163.0" text="Start">
+                                <font>
+                                    <Font size="15.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="302.0" layoutY="163.0" text="Start Time">
+                                <font>
+                                    <Font size="15.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="307.0" layoutY="207.0" text="Duration">
+                                <font>
+                                    <Font size="15.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="textBookingEst" layoutX="720.0" layoutY="195.0" prefHeight="26.0" prefWidth="69.0" />
+                            <TextField fx:id="textBookingNewEvent" layoutX="720.0" layoutY="230.0" prefHeight="25.0" prefWidth="151.0" />
+                            <Label layoutX="590.0" layoutY="199.0" text="Estimated Attendees" />
+                            <Label layoutX="634.0" layoutY="234.0" text="Event Name" />
+                            <Label layoutX="604.0" layoutY="165.0" text="Room Number" />
+                            <Button fx:id="btnBooking" layoutX="919.0" layoutY="295.0" mnemonicParsing="false" onAction="#makeNewBooking" text="Book" />
+                            <Label layoutX="39.0" layoutY="98.0" text="Weekly" />
+                            <DatePicker fx:id="bookingDate" layoutX="84.0" layoutY="161.0" />
+                            <Spinner fx:id="bookingTime" layoutX="395.0" layoutY="161.0" prefWidth="150.0" />
+                            <Spinner fx:id="bookingDuration" layoutX="395.0" layoutY="205.0" prefWidth="150.0" />
+                            <ComboBox fx:id="bookingRoomNum" layoutX="720.0" layoutY="161.0" prefWidth="150.0" />
+                            <Label fx:id="newBookingMsg" layoutX="597.0" layoutY="299.0" text="Label" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
+</children>
+</AnchorPane>
